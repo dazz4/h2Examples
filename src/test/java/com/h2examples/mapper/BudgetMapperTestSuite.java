@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -31,4 +34,32 @@ public class BudgetMapperTestSuite {
         assertEquals("Dazz's Budget", budget.getName());
     }
 
+    @Test
+    public void testMapToBudgetDto() {
+        //Given
+        Budget budget = new Budget(1L,"Dazz's Budget");
+
+        //When
+        BudgetDto budgetDto = mapper.mapToBudgetDto(budget);
+
+        //Then
+        assertNotNull(budgetDto);
+        assertEquals(Long.valueOf(1), budgetDto.getId());
+        assertEquals("Dazz's Budget", budgetDto.getName());
+    }
+
+    @Test
+    public void testMapToBudgetDtoList() {
+        //Given
+        Budget budget = new Budget(1L,"Dazz's Budget");
+        List<Budget> budgets = new ArrayList<>();
+        budgets.add(budget);
+
+        //When
+        List<BudgetDto> budgetDtoList = mapper.mapToBudgetDtoList(budgets);
+
+        //Then
+        assertNotNull(budgetDtoList);
+        assertEquals(1, budgets.size());
+    }
 }
