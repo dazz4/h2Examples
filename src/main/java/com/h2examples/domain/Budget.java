@@ -17,7 +17,8 @@ import java.util.List;
 @Entity
 public class Budget {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "budget_generator")
+    @SequenceGenerator(name = "budget_generator", sequenceName = "budget_seq")
     private Long id;
     private String name;
 

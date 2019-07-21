@@ -15,7 +15,8 @@ import java.math.BigDecimal;
 @Entity
 public class Account {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_generator")
+    @SequenceGenerator(name = "account_generator", sequenceName = "account_seq")
     private Long id;
     private String name;
     private BigDecimal balance;
