@@ -29,7 +29,12 @@ public class Budget {
             fetch = FetchType.EAGER
     )
     @JsonIgnore
-    private List<Account> accounts = new ArrayList<>();
+    private List<Account> accounts;
+
+    public Budget(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Budget(String name) {
         this.name = name;

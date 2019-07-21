@@ -24,59 +24,31 @@ public class AccountServiceTestSuite {
     private BudgetService budgetService;
 
     @Test
-    public void testSaveOrUpdate() {
+    public void testAccountService() {
         //Given
-        Budget budget = new Budget("Dazz's Budget");
-        Account account = new Account("Checking", new BigDecimal(1000), budget);
-
-        //When
-        budgetService.saveOrUpdate(budget);
-        accountService.saveOrUpdate(account);
-
-        //Then
-        assertNotNull(accountService.getAccount(account.getId()));
-
-        //CleanUp
-        accountService.delete(account.getId());
-    }
-
-    @Test
-    public void testGetAllAccouts() {
-        //Given
-        Budget budget = new Budget("Dazz's Budget");
+        Budget budget = new Budget("Kasia's Budget");
         Account account1 = new Account("Checking", new BigDecimal(1000), budget);
         Account account2 = new Account("Cash", new BigDecimal(500), budget);
+        Account updatedAccount = new Account(2L, "Halifax", new BigDecimal(1000), budget);
 
-        //When
+        //Then
         budgetService.saveOrUpdate(budget);
         accountService.saveOrUpdate(account1);
         accountService.saveOrUpdate(account2);
-        List<Account> accountList = accountService.getAllAccounts();
-
-        //Then
-        assertNotNull(accountList);
-        assertEquals(2, accountList.size());
-
-        //CleanUp
-        //accountService.delete(account1.getId());
-        //accountService.delete(account2.getId());
-    }
-
-    @Test
-    public void testGetAccount() {
-        //Given
-        Budget budget = new Budget("Dazz's Budget");
-        Account account = new Account("Checking", new BigDecimal(1000), budget);
+        accountService.saveOrUpdate(updatedAccount);
+        Account tempAccount = accountService.getAccount(1L);
+        Account updatedTempAccount = accountService.getAccount(2L);
+        List<Account> accounts = accountService.getAllAccounts();
 
         //When
-        budgetService.saveOrUpdate(budget);
-        accountService.saveOrUpdate(account);
-        Account tempAccount = accountService.getAccount(account.getId());
-
-        //Then
         assertNotNull(tempAccount);
-
-        //CleanUp
-        accountService.delete(account.getId());
+        assertNotNull(updatedTempAccount);
+        assertNotNull(accounts);
+        assertEquals(2, accounts.size());
+        assertEquals("Checking", tempAccount.getName());
+        assertEquals("Halifax", updatedTempAccount.getName());
     }
 }
+
+
+
