@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class Budget {
             fetch = FetchType.EAGER
     )
     @JsonIgnore
-    private List<Account> accounts;
+    private List<Account> accounts = new ArrayList<>();
 
     public Budget(String name) {
         this.name = name;
