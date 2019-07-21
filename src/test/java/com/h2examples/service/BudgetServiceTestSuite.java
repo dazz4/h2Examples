@@ -32,7 +32,7 @@ public class BudgetServiceTestSuite {
         //Then
         assertNotNull(savedBudget);
         assertNotNull(tempBudget);
-        assertEquals(1, budgets.size());
+        assertEquals("Dazz's Budget", budgets.get(0).getName());
         assertEquals("Dazz's Budget", tempBudget.getName());
     }
 }

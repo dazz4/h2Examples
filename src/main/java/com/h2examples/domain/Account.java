@@ -22,7 +22,6 @@ public class Account {
     private BigDecimal balance;
 
     @ManyToOne
-    @JoinColumn(name = "budget_id")
     private Budget budget;
 
     public Account(String name, BigDecimal balance, Budget budget) {

@@ -26,27 +26,22 @@ public class AccountServiceTestSuite {
     @Test
     public void testAccountService() {
         //Given
-        Budget budget = new Budget("Kasia's Budget");
+        Budget budget = new Budget("Dazz's Budget");
         Account account1 = new Account("Checking", new BigDecimal(1000), budget);
         Account account2 = new Account("Cash", new BigDecimal(500), budget);
-        Account updatedAccount = new Account(2L, "Halifax", new BigDecimal(1000), budget);
 
         //Then
         budgetService.saveOrUpdate(budget);
         accountService.saveOrUpdate(account1);
         accountService.saveOrUpdate(account2);
-        accountService.saveOrUpdate(updatedAccount);
         Account tempAccount = accountService.getAccount(1L);
-        Account updatedTempAccount = accountService.getAccount(2L);
         List<Account> accounts = accountService.getAllAccounts();
 
         //When
         assertNotNull(tempAccount);
-        assertNotNull(updatedTempAccount);
         assertNotNull(accounts);
         assertEquals(2, accounts.size());
         assertEquals("Checking", tempAccount.getName());
-        assertEquals("Halifax", updatedTempAccount.getName());
     }
 }
 

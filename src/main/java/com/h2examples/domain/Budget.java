@@ -22,13 +22,8 @@ public class Budget {
     private Long id;
     private String name;
 
-    @OneToMany(
-            targetEntity = Account.class,
-            mappedBy = "budget",
-            cascade = CascadeType.REMOVE,
-            fetch = FetchType.EAGER
-    )
-    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "budget_id")
     private List<Account> accounts;
 
     public Budget(Long id, String name) {
